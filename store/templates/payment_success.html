@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Төлем сәтті{% endblock %}
+
+{% block content %}
+<div class="alert alert-success text-center">
+    <h2 class="mb-4">✅ Төлем сәтті аяқталды!</h2>
+
+    {% if payment_type == 'full' %}
+        <p class="lead">Сіз толық төледіңіз: <strong>{{ total_price }} ₸</strong></p>
+    {% else %}
+        <p class="lead">Төлем түрі: <strong>{{ payment_type }}</strong></p>
+        <p>Ай сайынғы төлем: <strong>{{ monthly_payment|floatformat:0 }} ₸</strong></p>
+        <p>Ай саны: <strong>{{ installment_months }}</strong> ай</p>
+    {% endif %}
+
+    <hr>
+    <p>Сіздің тапсырысыңыз өңделіп жатыр. Жақында жеткізіледі.</p>
+
+    <a href="{% url 'home' %}" class="btn btn-outline-primary mt-3">Басты бетке оралу</a>
+</div>
+{% endblock %}

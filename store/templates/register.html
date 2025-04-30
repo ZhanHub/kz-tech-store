@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Тіркелу{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4 text-center">Тіркелу</h2>
+        <form method="post" class="card p-4 shadow-sm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success w-100 mt-3">Тіркелу</button>
+        </form>
+        <p class="text-center mt-3">
+            Тіркелгенсіз бе? <a href="{% url 'login' %}">Кіру</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

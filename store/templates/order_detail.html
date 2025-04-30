@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Тапсырыс туралы мәлімет{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Тапсырыс туралы мәлімет</h2>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <p><strong>Өнім:</strong> {{ order.product.name }}</p>
+        <p><strong>Бағасы:</strong> {{ order.total_price }} ₸</p>
+        <p><strong>Төлем түрі:</strong> 
+            {% if order.payment_type == 'full' %}Толық төлеу
+            {% elif order.payment_type == 'installment' %}Рассрочка
+            {% elif order.payment_type == 'credit' %}Кредит
+            {% endif %}
+        </p>
+
+        {% if order.payment_type in 'installment,credit' %}
+            <p><strong>Ай саны:</strong> {{ order.months }} ай</p>
+            <p><strong>Ай сайынғы төлем:</strong> {{ monthly_payment|floatformat:0 }} ₸</p>
+        {% endif %}
+
+        <p><strong>Жеткізу адресі:</strong> {{ order.address }}</p>
+        <p><strong>Телефон номері:</strong> {{ order.phone }}</p>
+        <p><strong>Саны:</strong> {{ order.quantity }}</p>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between">
+        <form action="{% url 'cancel_order' order.id %}" method="post" onsubmit="return confirm('Тапсырысты жоюға сенімдісіз бе?');">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Тапсырысты болдырмау</button>
+        </form>
+        <a href="{% url 'order_list' %}" class="btn btn-secondary">← Артқа</a>
+    </div>
+</div>
+{% endblock %}

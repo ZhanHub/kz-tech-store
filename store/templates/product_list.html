@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Өнімдер тізімі{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Өнімдер</h2>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    {% for product in products %}
+    <div class="col">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">Бағасы: {{ product.price }} ₸</p>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="card-footer text-center">
+                <form method="get" action="{% url 'checkout' product.id %}">
+                    <button type="submit" class="btn btn-primary">Сатып алу</button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p>Өнімдер табылмады.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Брендтер{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Брендтер тізімі</h2>
+
+<div class="row row-cols-1 row-cols-md-2 g-3">
+    {% for brand in brands %}
+    <div class="col">
+        <div class="card h-100 border-info">
+            <div class="card-body">
+                <h5 class="card-title">{{ brand.name }}</h5>
+                <p class="card-text text-muted">Елі: {{ brand.country }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">Брендтер табылмады.</p>
+    {% endfor %}
+</div>
+{% endblock %}

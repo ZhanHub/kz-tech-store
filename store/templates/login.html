@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Кіру{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2 class="mb-4 text-center">Кіру</h2>
+        <form method="post" class="card p-4 shadow-sm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary w-100 mt-3">Кіру</button>
+        </form>
+        <p class="text-center mt-3">
+            Әлі тіркелмегенсіз бе? <a href="{% url 'register' %}">Тіркелу</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

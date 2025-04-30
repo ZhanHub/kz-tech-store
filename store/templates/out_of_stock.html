@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Өнім жоқ{% endblock %}
+
+{% block content %}
+<div class="alert alert-warning text-center">
+    <h2 class="mb-3">😔 Кешіріңіз!</h2>
+    <p>Өнім <strong>{{ product.name }}</strong> — қазір қолжетімсіз.</p>
+    <a href="{% url 'product_list' %}" class="btn btn-outline-primary mt-3">Өнімдерге қайту</a>
+</div>
+{% endblock %}

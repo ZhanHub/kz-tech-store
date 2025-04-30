@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Төлем жасау{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Төлем жасау: {{ product.name }}</h2>
+
+<form method="post" class="row g-3">
+    {% csrf_token %}
+    <div class="col-md-6">
+        <label class="form-label">Аты-жөні:</label>
+        <input type="text" name="name" class="form-control" required>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Телефон номері:</label>
+        <input type="text" name="phone" class="form-control" required>
+    </div>
+
+    <div class="col-12">
+        <label class="form-label">Адрес:</label>
+        <textarea name="address" class="form-control" rows="2" required></textarea>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label">Төлем түрі:</label>
+        <select name="payment_type" id="payment_type" class="form-select" onchange="toggleInstallments()" required>
+            <option value="full">Толық төлеу</option>
+            <option value="installment">Рассрочка</option>
+            <option value="credit">Кредит</option>
+        </select>
+    </div>
+
+    <div class="col-md-6" id="installments" style="display: none;">
+        <label class="form-label">Ай саны:</label>
+        <select name="installment_months" class="form-select">
+            <option value="6">6 ай</option>
+            <option value="12">12 ай</option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success w-100">Төлеу</button>
+    </div>
+</form>
+
+<script>
+    function toggleInstallments() {
+        var paymentType = document.getElementById('payment_type').value;
+        var installments = document.getElementById('installments');
+        if (paymentType === 'installment' || paymentType === 'credit') {
+            installments.style.display = 'block';
+        } else {
+            installments.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}

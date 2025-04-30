@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Мониторинг{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Пайдаланушы әрекеттері</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle">
+        <thead class="table-primary">
+            <tr>
+                <th>Қолданушы</th>
+                <th>Әрекет</th>
+                <th>Бет (Path)</th>
+                <th>Уақыты</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.username }}</td>
+                <td>{{ log.action }}</td>
+                <td>{{ log.path }}</td>
+                <td>{{ log.action_time }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center text-muted">Әзірге логтар жоқ</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

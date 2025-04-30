@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Басты бет{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    <h1 class="mb-4">Қош келдіңіз!</h1>
+
+    {% if user.is_authenticated %}
+        <p class="lead">Сәлем, <strong>{{ user.username }}</strong>!</p>
+    {% endif %}
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{% url 'product_list' %}" class="btn btn-outline-primary w-100">Өнімдер</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'category_list' %}" class="btn btn-outline-primary w-100">Категориялар</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'brand_list' %}" class="btn btn-outline-primary w-100">Брендтер</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'order_list' %}" class="btn btn-outline-primary w-100">Менің тапсырыстарым</a>
+                </li>
+                {% if user.is_superuser %}
+                <li class="list-group-item">
+                    <a href="{% url 'monitoring' %}" class="btn btn-outline-danger w-100">Мониторинг</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
